@@ -17,9 +17,18 @@ defmodule Practice do
   end
 
   def factor(x) do
-    # Maybe delegate this too.
-    # TODO fix this function
-    [1, 2, x]
+    factor(x, 2, [])
+  end
+
+  def factor(x, f, acc) do
+    cond do
+      x < f * f ->
+        Enum.reverse([x | acc])
+      rem(x, f) == 0 ->
+        factor(div(x, f), f, [f | acc])
+      true ->
+        factor(x, f + 1, acc)
+    end
   end
 
   def palindrome?(str) do
